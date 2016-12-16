@@ -87,9 +87,9 @@ public class Controller implements Initializable {
         comboBoxAlgorithm.setItems(algorithmsItems);
         comboxCodeOrDecode.setItems(codeOrDecodeItems);
         comboxCodeOrDecode.getSelectionModel().select(0);
-        try{
+        try {
             configureButtons();
-        }catch (Exception e){
+        } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
             alert.show();
         }
@@ -102,12 +102,12 @@ public class Controller implements Initializable {
 
     }
 
-    public void configureComboBoxListeners(){
+    public void configureComboBoxListeners() {
         comboBoxAlgorithm.valueProperty().addListener(new ChangeListener<String>() {
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if(comboBoxAlgorithm.getSelectionModel().getSelectedIndex()==1){
+                if (comboBoxAlgorithm.getSelectionModel().getSelectedIndex() == 1) {
                     checkBoxM22.setSelected(true);
-                }else {
+                } else {
                     checkBoxM22.setSelected(false);
                 }
             }
@@ -154,8 +154,13 @@ public class Controller implements Initializable {
                         //encrypt
                         if (checkBoxM22.isSelected()) {
                             double[][] matrixKey = fromGuiToMatrix2x();
-                            String encryptedText = hill.encrypt(textAreaSource.getText(), matrixKey, 2);
-                            textAreaTarget.setText(encryptedText);
+                            try {
+                                String encryptedText = hill.encrypt(textAreaSource.getText(), matrixKey, 2);
+                                textAreaTarget.setText(encryptedText);
+                            } catch (Exception e) {
+                                Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
+                            }
+
                         } else if (checkBoxM33.isSelected()) {
 
                         } else {
@@ -166,8 +171,13 @@ public class Controller implements Initializable {
                         //decrypt
                         if (checkBoxM22.isSelected()) {
                             double[][] matrixKey = fromGuiToMatrix2x();
-                            String originalText = hill.decrypt(textAreaSource.getText(), matrixKey, 2);
-                            textAreaTarget.setText(originalText);
+                            try {
+                                String originalText = hill.decrypt(textAreaSource.getText(), matrixKey, 2);
+                                textAreaTarget.setText(originalText);
+                            } catch (Exception e) {
+                                Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
+                            }
+
                         } else if (checkBoxM33.isSelected()) {
 
                         } else {

@@ -40,7 +40,7 @@ public class Hill {
         this.text = text;
     }
 
-    public String encrypt(String text, double[][] matrixKey, int dimensionOfMatrix) {
+    public String encrypt(String text, double[][] matrixKey, int dimensionOfMatrix) throws Exception {
         //HELLO
         String originalText = text.toUpperCase().replaceAll("\\s+",""); //Change to upper case
 
@@ -117,7 +117,7 @@ public class Hill {
         return  encryptedText;
     }
 
-    public String  decrypt(String text, double[][] matrixKey, int dimensionOfMatrix){
+    public String  decrypt(String text, double[][] matrixKey, int dimensionOfMatrix) throws Exception{
         System.out.println(text);
         //text = "PIHZIN";
         String decryptedText = text.toUpperCase().trim();
